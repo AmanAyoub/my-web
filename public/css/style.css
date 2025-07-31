@@ -112,7 +112,6 @@ body {
   border-radius: 6px;
   object-fit: cover;
   box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-  filter: sepia(0.3) hue-rotate(15deg) saturate(0.8) brightness(1.1) contrast(0.9);
 }
 
 @media (max-width: 900px) {
