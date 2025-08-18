@@ -1,0 +1,184 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Analytics Dashboard - Aman Ayoub
+    style.
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 2rem;
+      }
+      .dashboard {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      h1 {
+        color: white;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+      .stat-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      }
+      .stat-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #667eea;
+        margin-bottom: 0.5rem;
+      }
+      .stat-label {
+        color: #666;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .visitors-table {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        text-align: left;
+        padding: 0.75rem;
+        border-bottom: 2px solid #f0f0f0;
+        color: #333;
+        font-weight: 600;
+      }
+      td {
+        padding: 0.75rem;
+        border-bottom: 1px solid #f0f0f0;
+        color: #666;
+      }
+      .loading {
+        color: white;
+        text-align: center;
+        font-size: 1.2rem;
+      }
+      .error {
+        background: #ff4757;
+        color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        text-align: center;
+      }
+      .refresh-btn {
+        background: white;
+        color: #667eea;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+      .refresh-btn:hover {
+        background: #f0f0f0;
+      }
+  body
+    .dashboard
+      h1 📊 Visitor Analytics Dashboard
+      
+      button.refresh-btn(onclick="fetchAnalytics()") 🔄 Refresh Data
+      
+      #loading.loading Loading analytics data...
+      
+      #error.error(style="display:none")
+      
+      #analytics(style="display:none")
+        .stats-grid
+          .stat-card
+            .stat-value#total-visits 0
+            .stat-label Total Visits
+          .stat-card
+            .stat-value#unique-visitors 0
+            .stat-label Unique Visitors
+          .stat-card
+            .stat-value#visits-24h 0
+            .stat-label Last 24 Hours
+        
+        .visitors-table
+          h2(style="margin-bottom: 1rem; color: #333;") Recent Visitors
+          table
+            thead
+              tr
+                th Time
+                th Page
+                th IP Address
+                th Referrer
+            tbody#visitors-tbody
+    
+    script.
+      async function fetchAnalytics() {
+        document.getElementById('loading').style.display = 'block';
+        document.getElementById('error').style.display = 'none';
+        document.getElementById('analytics').style.display = 'none';
+        
+        try {
+          const response = await fetch('/analytics');
+          const data = await response.json();
+          
+          if (data.error) {
+            throw new Error(data.error);
+          }
+          
+          // Update stats
+          document.getElementById('total-visits').textContent = data.totalVisits || 0;
+          document.getElementById('unique-visitors').textContent = data.uniqueIPs || 0;
+          document.getElementById('visits-24h').textContent = data.last24Hours || 0;
+          
+          // Update recent visitors table
+          const tbody = document.getElementById('visitors-tbody');
+          tbody.innerHTML = '';
+          
+          if (data.recentVisitors && data.recentVisitors.length > 0) {
+            data.recentVisitors.forEach(visitor => {
+              const row = tbody.insertRow();
+              const time = new Date(visitor.timestamp).toLocaleString();
+              row.innerHTML = `
+                <td>${time}</td>
+                <td>${visitor.page}</td>
+                <td>${visitor.ip}</td>
+                <td>${visitor.referrer}</td>
+              `;
+            });
+          } else {
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">No visitors yet</td></tr>';
+          }
+          
+          document.getElementById('loading').style.display = 'none';
+          document.getElementById('analytics').style.display = 'block';
+        } catch (error) {
+          document.getElementById('loading').style.display = 'none';
+          document.getElementById('error').style.display = 'block';
+          document.getElementById('error').textContent = 'Error loading analytics: ' + error.message;
+        }
+      }
+      
+      // Load analytics on page load
+      fetchAnalytics();
+      
+      // Auto-refresh every 30 seconds
+      setInterval(fetchAnalytics, 30000); 
