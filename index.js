@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
     res.render('index', {
         github: "https://github.com/AmanAyoub",
-        twitter: "https://x.com/amanullah_ayoub",
+        twitter: "https://x.com/amanayb",
         linkedIn: "https://www.linkedin.com/in/amanayoub/"
     });
 });
