@@ -172,7 +172,7 @@ body {
   
   .hero-content h1 {
     font-size: 1.8rem;
-    margin: 0px 0 20px 0;
+    margin: -20px 0 20px 0;
     font-weight: 600;
   }
   
@@ -227,7 +227,7 @@ body {
   
   .hero-content h1 {
     font-size: 1.6rem;
-    margin: 10px 0 8px 0;
+    margin: -20px 0 8px 0;
   }
   
   .hero-content p {
