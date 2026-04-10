@@ -5,16 +5,16 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     
     //- SEO Meta Tags
-    title #{profile.name} - #{profile.title}
+    title Aman Ayoub - Full-Stack Developer
     
     //- Favicon
     link(rel="icon" type="image/x-icon" href="/images/logo.ico")
     link(rel="shortcut icon" type="image/x-icon" href="/images/logo.ico")
     link(rel="apple-touch-icon" href="/images/logo.ico")
     
-    meta(name="description" content=profile.bio)
+    meta(name="description" content="Aman Ayoub is a full-stack developer building scalable solutions and turning ideas into code. Currently working on Dimmi. Based in Kabul, Afghanistan.")
     meta(name="keywords" content="Aman Ayoub, Full Stack Developer, Full-Stack Developer, Backend Developer, Frontend Developer, Web Developer, Software Engineer, Kabul, Afghanistan, D&SG")
-    meta(name="author" content=profile.name)
+    meta(name="author" content="Aman Ayoub")
     meta(name="robots" content="index, follow")
     meta(name="googlebot" content="index, follow")
     link(rel="canonical" href="https://amanayoub.com")
@@ -22,20 +22,38 @@ html(lang="en")
     //- Open Graph / Facebook Meta Tags
     meta(property="og:type" content="website")
     meta(property="og:url" content="https://amanayoub.com")
-    meta(property="og:title" content=`${profile.name} - ${profile.title}`)
-    meta(property="og:description" content=profile.bio)
+    meta(property="og:title" content="Aman Ayoub - Full-Stack Developer")
+    meta(property="og:description" content="Full-stack developer building scalable solutions and turning ideas into code. Currently working on Dimmi. Based in Kabul, Afghanistan.")
     meta(property="og:image" content="https://amanayoub.com/images/profile.jpg")
     
     //- Twitter Card Meta Tags
     meta(property="twitter:card" content="summary_large_image")
     meta(property="twitter:url" content="https://amanayoub.com")
-    meta(property="twitter:title" content=`${profile.name} - ${profile.title}`)
-    meta(property="twitter:description" content=profile.bio)
+    meta(property="twitter:title" content="Aman Ayoub - Full-Stack Developer")
+    meta(property="twitter:description" content="Full-stack developer building scalable solutions and turning ideas into code. Currently working on Dimmi. Based in Kabul, Afghanistan.")
     meta(property="twitter:image" content="https://amanayoub.com/images/profile.jpg")
     
     //- Structured Data (JSON-LD)
     script(type="application/ld+json").
-      !{personJsonLd}
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Aman Ayoub",
+        "url": "https://amanayoub.com",
+        "image": "https://amanayoub.com/images/profile.jpg",
+        "jobTitle": "Full-Stack Developer",
+        "email": "ayoubamanullah@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Kabul",
+          "addressCountry": "Afghanistan"
+        },
+        "sameAs": [
+          "https://github.com/AmanAyoub",
+          "https://x.com/amanullah_ayoub",
+          "https://www.linkedin.com/in/amanayoub/"
+        ]
+      }
     
     link(rel="stylesheet", href="/css/style.css")
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css")
@@ -43,28 +61,22 @@ html(lang="en")
     .container
       main.hero
         .hero-content
-          p.eyebrow #{profile.title}
-          h1 #{profile.name}
-          p.lede #{profile.headline}
-          p.bio
-            | #{profile.bio} Learn more about 
-            a(href=profile.company.url target="_blank" rel="noreferrer") #{profile.company.name}
-            | .
-          .hero-actions
-            a.contact-link(href=`mailto:${profile.email}`) Email me
-            a.contact-link.secondary(href=profile.socials.linkedIn target="_blank" rel="noreferrer") Connect on LinkedIn
-          a.handle(href=`mailto:${profile.email}`) #{profile.email}
+          h1 Aman Ayoub
+          p Full-stack developer building scalable solutions and turning ideas into code. Currently working on 
+            a(href="https://dimmi.app/" target="_blank") Dimmi
+            | . Based in Kabul, Afghanistan.
+          p.handle ayoubamanullah@gmail.com
           .social-icons
-            a(href=profile.socials.github, aria-label="GitHub" target="_blank" rel="noreferrer")
+            a(href=github, aria-label="GitHub" target="_blank")
               svg(xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-github" style="width:2rem;height:2rem;vertical-align:middle;")
                 path(stroke="none" d="M0 0h24v24H0z" fill="none")
                 path(d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5")
-            a(href=profile.socials.twitter, aria-label="X" target="_blank" rel="noreferrer")
+            a(href=twitter, aria-label="X" target="_blank")
               svg(xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x" style="width:2rem;height:2rem;vertical-align:middle;")
                 path(stroke="none" d="M0 0h24v24H0z" fill="none")
                 path(d="M4 4l11.733 16h4.267l-11.733 -16z")
                 path(d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772")
-            a(href=profile.socials.linkedIn, aria-label="LinkedIn" target="_blank" rel="noreferrer")
+            a(href=linkedIn, aria-label="LinkedIn" target="_blank")
               svg(xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-linkedin" style="width:2rem;height:2rem;vertical-align:middle;")
                 path(stroke="none" d="M0 0h24v24H0z" fill="none")
                 path(d="M8 11v5")
